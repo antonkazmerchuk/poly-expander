@@ -171,3 +171,40 @@ describe('distribute tests', function () {
 	});
 });
 
+describe('number tests', function () {
+	it('test 1', function () {
+		expect(tests.number(1)).toBeTruthy();
+	});
+
+	it('test 2', function () {
+		expect(tests.number(Number(1))).toBeTruthy();
+		expect(tests.number(new Number(1))).toBeTruthy();
+	});
+
+	it('test 3', function () {
+		expect(tests.number(NaN)).toBeFalsy();
+		expect(tests.number(NaN)).toBeFalsy();
+	});
+
+	it('test 4', function () {
+		expect(tests.number(' ')).toBeFalsy();
+		expect(tests.number('')).toBeFalsy();
+	});
+
+	it('test 5', function () {
+		expect(tests.number(new Object())).toBeFalsy();
+		expect(tests.number({})).toBeFalsy();
+		expect(tests.number(true)).toBeFalsy();
+		expect(tests.number(false)).toBeFalsy();
+		expect(tests.number(Boolean(true))).toBeFalsy();
+		expect(tests.number(new Boolean(true))).toBeFalsy();
+		expect(tests.number(/\s+/)).toBeFalsy();
+	});
+
+	it('test 6', function () {
+		expect(tests.number([])).toBeFalsy();
+		expect(tests.number(new Array())).toBeFalsy();
+	});
+
+});
+

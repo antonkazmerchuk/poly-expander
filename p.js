@@ -83,29 +83,61 @@
 	}
 
 	function number(potentialNumber) {
-		return typeof(potentialNumber) === 'number';
+		return (typeof(potentialNumber) === 'number' || Object.prototype.toString.apply(potentialNumber) === '[object Number]') && !isNaN(potentialNumber);
 	}
 
-	function incorrect(poly) {
-		if (poly.length === 1) {
-			return false;
-		} else {
-			var wereNumbers = false,
-				wereArrays = false;
+	function isEmptyArray(potentialEmptyArray) {
+		return Array.isArray(potentialEmptyArray) && potentialEmptyArray.length === 0;
+	}
 
-			if (!number(poly[0])) {
-				wereArrays = !wereArrays;
+	function isNonEmptyArray(potentialEmptyArray) {
+		return Array.isArray(potentialEmptyArray) && potentialEmptyArray.length !== 0;
+	}
+
+	// The algo goes as following:
+	// 1. If the first element is array and it's an empty array
+	// 		or the first element is a number then it is 'complex' polynomial. In sense that it is not simple
+	//	  - Then the remaining elements must be non-empty arrays
+	// 2. If the first element is a number, it is a 'simple' polynomial
+	// 	  - Then the remaining elements must be numbers
+	// 3. If the polynomial consists of one term, it cannot be an empty array
+	// 4. Otherwise it is incorrect
+	function incorrect(poly) {
+		var i, wereArrays, wereNumbers;
+
+		if (poly.length === 1) {
+			return !isEmptyArray(poly[0]);
+		} else if (number(poly[0])) {
+			wereArrays = false;
+			wereNumbers = false;
+
+			for (i = 1; i < poly.length; i++) {
+				if (number(poly[i]) && wereArrays) {
+					return false;
+				} else if (number(poly[i])) {
+					wereNumbers = true;
+					continue;
+				}
+
+				if (isNonEmptyArray(poly[i]) && wereNumbers) {
+					return false;
+				} else if (isNonEmptyArray(poly[i])) {
+					wereArrays = true;
+					continue;
+				}
+
+				return false;
 			}
 
-			for (var i = 1; i < poly.length; i++) {
-				if (number(poly[i])) {
-					wereNumbers = true;
-				} else {
-					wereArrays = true;
+			return false;
+		} else if (isEmptyArray(poly[0])) {
+			for (i = 1; i < poly.length; i++) {
+				if (!isNonEmptyArray(poly[i])) {
+					return false;
 				}
 			}
 
-			return wereArrays && wereNumbers;
+			return true;
 		}
 	}
 
