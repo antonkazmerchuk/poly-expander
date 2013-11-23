@@ -466,4 +466,45 @@ describe('expandPolynomial for multiplicative forms', function () {
 
 		expect(tests.expandPolynomial([p1, p2, p3, p4])).toEqual(expected);
 	});
+
+	// Some more tests, pretty random too
+
+	it('test 9', function () {
+		var poly = [8, [3,-5], [8, [1, -6], [1, 5, 3]], [15, [1, 0, 0]], [1, 4]],
+			expected = [2880, 3840, -103680, -214080, 397440, 345600, 0, 0];
+
+		expect(tests.expandPolynomial(poly)).toEqual(expected);	
+	});
+
+	it('test 10', function () {
+
+		var poly = [[3, -5], [1, -6]],
+			expected = [3, -23, 30];
+
+		expect(tests.expandPolynomial(poly)).toEqual(expected);
+	});
+
+	it('test 11', function () {
+
+		var poly = [[3, 0, 0, 0, 0, -6], [1, -6]],
+			expected = [3, -18, 0, 0, 0, -6, 36];
+
+		expect(tests.expandPolynomial(poly)).toEqual(expected);
+	});
+
+	it('test 12', function () {
+
+		var poly = [8, [1, -1], [1, -2], [1, -3], [8, [16, 0, 1], [1, 0, 0, 1]]],
+			expected = [1024, -6144, 11328, -5504, -5440, 10944, -6528, 704, -384];
+
+		expect(tests.expandPolynomial(poly)).toEqual(expected);
+	});
+
+	it('test 13', function () {
+
+		var poly = [8, [7, [6, [5, [4, [3, [2, [1, [1, 0, -1], [1, 0, 0, 3, 0, 0, 0, 0, 1]]]]]]]]],
+			expected = [40320, 0, -40320, 120960, 0, -120960, 0, 0, 40320, 0, -40320];
+
+		expect(tests.expandPolynomial(poly)).toEqual(expected);
+	});
 });
