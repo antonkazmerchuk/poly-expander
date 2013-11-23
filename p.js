@@ -1,3 +1,5 @@
+// http://github.com/antonkazmerchuk/poly-expander/
+
 (function (context, undefined) {
 
 	function minmax(arr1, arr2) {
@@ -192,20 +194,20 @@
 		}
 	}
 
-	//context.expandPolynomial = expandPolynomial;
+	context.expandPolynomial = expandPolynomial;
 
 	// DO TESTS:!
 
-	context.tests = {
-		map : map,
-		minmax: minmax,
-		plus : plus,
-		mult : mult,
-		reduce : reduce,
-		distribute : distribute,
-		number : number,
-		incorrect : incorrect,
-		simplePolynomial : simplePolynomial,
-		expandPolynomial : expandPolynomial
-	};
+	// context.tests = {
+	// 	map : map,
+	// 	minmax: minmax,
+	// 	plus : plus,
+	// 	mult : mult,
+	// 	reduce : reduce,
+	// 	distribute : distribute,
+	// 	number : number,
+	// 	incorrect : incorrect,
+	// 	simplePolynomial : simplePolynomial,
+	// 	expandPolynomial : expandPolynomial
+	// };
 }(window))
