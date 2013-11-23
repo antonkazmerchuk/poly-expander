@@ -400,7 +400,7 @@ describe('simplePolynomial tests', function () {
 	});
 });
 
-xdescribe('expandPolynomial for multiplicative forms', function () {
+describe('expandPolynomial for multiplicative forms', function () {
 	// Some random good polynomials (from distribute tests)
 	it('test 1', function () {
 		var p1 = [1, 0, 3],
