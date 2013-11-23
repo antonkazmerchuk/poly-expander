@@ -83,7 +83,9 @@
 	}
 
 	function number(potentialNumber) {
-		return (typeof(potentialNumber) === 'number' || Object.prototype.toString.apply(potentialNumber) === '[object Number]') && !isNaN(potentialNumber);
+		return (typeof(potentialNumber) === 'number' ||
+				 Object.prototype.toString.apply(potentialNumber) === '[object Number]') && 
+				!isNaN(potentialNumber);
 	}
 
 	function isEmptyArray(potentialEmptyArray) {
@@ -101,47 +103,58 @@
 	// 2. If the first element is a number, it is a 'simple' polynomial
 	// 	  - Then the remaining elements must be numbers
 	// 3. If the polynomial consists of one term, it cannot be an empty array
-	// 4. Otherwise it is incorrect
+	// 4. If it poly is empty array that's pretty incorrect
+	// 5. Otherwise it is incorrect
 	function incorrect(poly) {
 		var i, wereArrays, wereNumbers;
 
+		if (poly.length === 0) {
+			return true;
+		}
+
 		if (poly.length === 1) {
-			return !isEmptyArray(poly[0]);
+			return isEmptyArray(poly[0]);
 		} else if (number(poly[0])) {
 			wereArrays = false;
 			wereNumbers = false;
 
 			for (i = 1; i < poly.length; i++) {
 				if (number(poly[i]) && wereArrays) {
-					return false;
+					return true;
 				} else if (number(poly[i])) {
 					wereNumbers = true;
 					continue;
 				}
 
 				if (isNonEmptyArray(poly[i]) && wereNumbers) {
-					return false;
+					return true;
 				} else if (isNonEmptyArray(poly[i])) {
 					wereArrays = true;
 					continue;
 				}
 
-				return false;
+				return true;
 			}
 
 			return false;
 		} else if (isEmptyArray(poly[0])) {
 			for (i = 1; i < poly.length; i++) {
 				if (!isNonEmptyArray(poly[i])) {
-					return false;
+					return true;
 				}
 			}
 
-			return true;
+			return false;
 		}
+
+		return true;
 	}
 
 	function simplePolynomial(poly) {
+		if (poly.length === 0) {
+			return false;
+		}
+
 		for (var i = 0; i < poly.length; i++) {
 			if (!number(poly[i])) {
 				return false;

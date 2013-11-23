@@ -208,3 +208,166 @@ describe('number tests', function () {
 
 });
 
+// Incorrect only tests the 'surface' level of polynomial
+// It doesn't test deeper levels, they are intended to be tested as the recursion goes
+describe('incorrect tests', function () {
+	it('test 1', function () {
+		// Correct one
+		var poly = [[[[[[[[[[[[[[[[[1]]]]]]]]]]]]]]]]];
+
+		expect(tests.incorrect(poly)).toBeFalsy();
+	});
+
+	it('test 2', function () {
+		// Correct one
+		var poly = [[], [1,2],[[], [1,2]]];
+
+		expect(tests.incorrect(poly)).toBeFalsy();
+	});
+
+	it('test 3', function () {
+		// Incorrect one
+		var poly = [[], [1,2],[[], [1,2]], 1, [1]];
+
+		expect(tests.incorrect(poly)).toBeTruthy();
+	});	
+
+	it('test 4', function () {
+		// Incorrect one
+		var poly = [[], [1, 2], [], [1,2]];
+
+		expect(tests.incorrect(poly)).toBeTruthy();
+	});
+
+	it('test 5', function () {
+		// Correct one
+		var poly = [1, [2, 3], [2,3]];
+
+		expect(tests.incorrect(poly)).toBeFalsy();
+	});
+
+	it('test 6', function () {
+
+		var poly = [1, [2,3], 1, [2]];
+
+		expect(tests.incorrect(poly)).toBeTruthy();
+	});
+
+	it('test 7', function () {
+
+		var poly = [1, [2,3], [], [2]];
+
+		expect(tests.incorrect(poly)).toBeTruthy();
+	});
+
+	it('test 8', function () {
+
+		var poly = [1, [2,3], [[]], [2]];
+
+		expect(tests.incorrect(poly)).toBeFalsy();
+	});
+
+	it('test 9', function () {
+
+		var poly = [1, 1, 2, 3, 2];
+
+		expect(tests.incorrect(poly)).toBeFalsy();
+	});
+
+	it('test 10', function () {
+
+		var poly = [1, 1, 2, [3], 2];
+
+		expect(tests.incorrect(poly)).toBeTruthy();
+	});
+
+	it('test 11', function () {
+
+		var poly = [['you'], [1,2],[[], [1,2]]];
+
+		expect(tests.incorrect(poly)).toBeTruthy();
+	});	
+
+	it('test 12', function () {
+
+		var poly = ['you', [2, 3], [2,3]];
+
+		expect(tests.incorrect(poly)).toBeTruthy();
+	});
+
+	it('test 13', function () {
+
+		var poly = [1, /you/, 2, 3, 2];
+
+		expect(tests.incorrect(poly)).toBeTruthy();
+	});
+
+	it('test 14', function () {
+
+		var poly = [];
+
+		expect(tests.incorrect(poly)).toBeTruthy();
+	});
+});
+
+describe('simplePolynomial tests', function () {
+	it('test 1', function () {
+		var poly = [1, 2, 3];
+
+		expect(tests.simplePolynomial(poly)).toBeTruthy();
+	});
+
+	it('test 2', function () {
+		var poly = [];
+
+		expect(tests.simplePolynomial(poly)).toBeFalsy();
+	});
+
+	it('test 3', function () {
+		var poly = [1, []];
+
+		expect(tests.simplePolynomial(poly)).toBeFalsy();
+	});
+
+	it('test 4', function () {
+		var poly = [1, [2]];
+
+		expect(tests.simplePolynomial(poly)).toBeFalsy();
+	});
+
+	it('test 5', function () {
+		var poly = [1, [2], 1];
+
+		expect(tests.simplePolynomial(poly)).toBeFalsy();
+	});
+
+	it('test 6', function () {
+		var poly = [[]];
+
+		expect(tests.simplePolynomial(poly)).toBeFalsy();
+	});
+
+	it('test 7', function () {
+		var poly = [[], 1];
+
+		expect(tests.simplePolynomial(poly)).toBeFalsy();
+	});
+
+	it('test 8', function () {
+		var poly = [[], 1, [1]];
+
+		expect(tests.simplePolynomial(poly)).toBeFalsy();
+	});
+
+	it('test 9', function () {
+		var poly = [[], [1, 2], [1]];
+
+		expect(tests.simplePolynomial(poly)).toBeFalsy();
+	});
+
+	it('test 10', function () {
+		var poly = [1, [], 'str'];
+
+		expect(tests.simplePolynomial(poly)).toBeFalsy();
+	});
+});
