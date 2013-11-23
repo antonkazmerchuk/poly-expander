@@ -523,4 +523,13 @@ describe('expandPolynomial non-classified tests', function () {
 
 		expect(tests.expandPolynomial(poly)).toEqual(expected);	
 	})
-})
+});
+
+describe('expandPolynomial additive forms', function () {
+	it('test 1', function () {
+		var poly = [[], [[1, -1], [1, -1]], [2, [1, -1]], [1]],
+			expected = [1, 0, 0];
+
+		expect(tests.expandPolynomial(poly)).toEqual(expected);
+	});
+});

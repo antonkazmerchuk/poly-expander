@@ -178,14 +178,18 @@
 
 		if (simplePolynomial(poly)) {
 			return poly;
-		} else if (number(poly[0])) {
+		} else if (number(poly[0]) || isEmptyArray(poly[0])) {
 			coefficient = poly[0];
 			poly = poly.slice(1);
 		} else {
 			coefficient = 1;
 		}
 
-		return mult(coefficient, distribute(map(poly, expandPolynomial)));
+		if (number(coefficient)) {
+			return mult(coefficient, distribute(map(poly, expandPolynomial)));	
+		} else {
+			return reduce(map(poly, expandPolynomial), plus);
+		}
 	}
 
 	//context.expandPolynomial = expandPolynomial;
