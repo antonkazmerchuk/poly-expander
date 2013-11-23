@@ -553,4 +553,19 @@ describe('expandPolynomial additive forms', function () {
 
 		expect(tests.expandPolynomial(poly)).toApproxBeEqual(expected);
 	});
+
+	it('test 3', function () {
+
+		var poly = [[], [0.3, [1,0], [8, [1, -8], [1, -15]]], [1.3, [18, [1, 0, 0, -2]]]],
+			expected = [129/5, -276/5, 288, -234/5];
+
+		expect(tests.expandPolynomial(poly)).toApproxBeEqual(expected);	
+	});
+
+	it('test 4', function () {
+		var poly = [[], [8,[6,[5,[4,[80, 12]]]]], [21,[1,0,0]], [31, [5, [3, [1, 0, 0, 8],[1,-3]]]]],
+			expected = [465, -1395, 21, 80520, 360];
+
+		expect(tests.expandPolynomial(poly)).toEqual(expected);	
+	});
 });
