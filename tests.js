@@ -508,3 +508,19 @@ describe('expandPolynomial for multiplicative forms', function () {
 		expect(tests.expandPolynomial(poly)).toEqual(expected);
 	});
 });
+
+describe('expandPolynomial non-classified tests', function () {
+	it('test 1', function () {
+		var poly = [0],
+			expected = [0];
+
+		expect(tests.expandPolynomial(poly)).toEqual(expected);
+	});
+
+	it('test 2', function () {
+		var poly = [1, 2, 3, 4, 5, 6, 7 ,8, 9 , 10],
+			expected = [1, 2, 3, 4, 5, 6, 7 ,8, 9 , 10];
+
+		expect(tests.expandPolynomial(poly)).toEqual(expected);	
+	})
+})
