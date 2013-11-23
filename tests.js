@@ -1,3 +1,15 @@
+jasmine.Matchers.prototype.toApproxBeEqual = function (expected, precision) {
+	var delta = Math.pow(10, precision && -precision || -2);
+
+	for (var i = 0; i < this.actual.length; i++) {
+		if(Math.abs(this.actual[i] - expected[i]) > delta) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
 describe('map tests', function () {
 	it('test 1', function () {
 		var ar = [1, 2, 3],
@@ -526,10 +538,19 @@ describe('expandPolynomial non-classified tests', function () {
 });
 
 describe('expandPolynomial additive forms', function () {
+	// Rather random tests too
+
 	it('test 1', function () {
 		var poly = [[], [[1, -1], [1, -1]], [2, [1, -1]], [1]],
 			expected = [1, 0, 0];
 
 		expect(tests.expandPolynomial(poly)).toEqual(expected);
+	});
+
+	it('test 2', function () {
+		var poly = [[], [0.236, [1, -1], [1, -2], [1, -3]], [0.5, [1, -1], [1, -2]], [-1.538, [1, -1]], [18.1]],
+			expected = [59/250, -229/250, -221/500, 9611/500];
+
+		expect(tests.expandPolynomial(poly)).toApproxBeEqual(expected);
 	});
 });
