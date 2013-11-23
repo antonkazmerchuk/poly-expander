@@ -285,7 +285,7 @@ describe('incorrect tests', function () {
 
 		var poly = [['you'], [1,2],[[], [1,2]]];
 
-		expect(tests.incorrect(poly)).toBeTruthy();
+		expect(tests.incorrect(poly)).toBeFalsy();
 	});	
 
 	it('test 12', function () {
@@ -305,6 +305,34 @@ describe('incorrect tests', function () {
 	it('test 14', function () {
 
 		var poly = [];
+
+		expect(tests.incorrect(poly)).toBeTruthy();
+	});
+
+	it('test 15', function () {
+
+		var poly = [[1, 2], [3, 5], [5, 3,1 ,1, 2, 2]];
+
+		expect(tests.incorrect(poly)).toBeFalsy();
+	});
+
+	it('test 16', function () {
+
+		var poly = [[1, 2], [3, 5], [], [5, 3,1 ,1, 2, 2]];
+
+		expect(tests.incorrect(poly)).toBeTruthy();
+	});
+
+	it('test 17', function () {
+
+		var poly = [[1, 2], [3, 5], 0, [5, 3,1 ,1, 2, 2]];
+
+		expect(tests.incorrect(poly)).toBeTruthy();
+	});
+
+	it('test 18', function () {
+
+		var poly = ['you'];
 
 		expect(tests.incorrect(poly)).toBeTruthy();
 	});
@@ -369,5 +397,73 @@ describe('simplePolynomial tests', function () {
 		var poly = [1, [], 'str'];
 
 		expect(tests.simplePolynomial(poly)).toBeFalsy();
+	});
+});
+
+xdescribe('expandPolynomial for multiplicative forms', function () {
+	// Some random good polynomials (from distribute tests)
+	it('test 1', function () {
+		var p1 = [1, 0, 3],
+			p2 = [1, 0, 0, 0, 0, 0, -7, -1, 21],
+			expected = [1, 0, 3, 0, 0, 0, -7, -1, 0, -3, 63];
+
+		expect(tests.expandPolynomial([p1, p2])).toEqual(expected);
+		expect(tests.expandPolynomial([p2, p1])).toEqual(expected);
+	});
+
+	it('test 2', function () {
+		var p1 = [1, 1, 1],
+			p2 = [1, -1, -1],
+			expected = [1, 0, -1, -2, -1];
+
+		expect(tests.expandPolynomial([p1, p2])).toEqual(expected);
+		expect(tests.expandPolynomial([p2, p1])).toEqual(expected);
+	});
+
+	it('test 3', function () {
+		var p1 = [5, -1],
+			p2 = [12, 0],
+			expected = [60, -12, 0];
+
+		expect(tests.expandPolynomial([p1, p2])).toEqual(expected);
+		expect(tests.expandPolynomial([p2, p1])).toEqual(expected);
+	});
+
+	it('test 4', function () {
+		var p1 = [1, -1],
+			expected = [1, -2, 1];
+
+		expect(tests.expandPolynomial([p1, p1])).toEqual(expected);
+	});
+
+	it('test 5', function () {
+		var p1 = [1, -1],
+			expected = [1, -3, 3, -1];
+
+		expect(tests.expandPolynomial([p1, p1, p1])).toEqual(expected);
+	});
+
+	it('test 6', function () {
+		var p1 = [1, -1],
+			expected = [1, -4, 6, -4, 1];
+
+		expect(tests.expandPolynomial([p1, p1, p1, p1])).toEqual(expected);
+	});
+
+	it('test 7', function () {
+		var p1 = [1, -1],
+			expected = [1, -5, 10, -10, 5, -1];
+
+		expect(tests.expandPolynomial([p1, p1, p1, p1, p1])).toEqual(expected);
+	});
+
+	it('test 8', function () {
+		var p1 = [1, -1],
+			p2 = [1, 1, 1],
+			p3 = [3, 5, 6],
+			p4 = [8, 0, 0, 0, 0, 0],
+			expected = [24, 40, 48, -24, -40, -48, 0, 0, 0, 0, 0];
+
+		expect(tests.expandPolynomial([p1, p2, p3, p4])).toEqual(expected);
 	});
 });
