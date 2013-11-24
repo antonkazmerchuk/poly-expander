@@ -1,4 +1,4 @@
 poly-expander
 =============
 
-poly-expander is intended to expand polynomials. but now he can only expand simple multiplication terms, however deep they are nested :(
+poly-expander is intended to expand polynomials. it can work with multiplicative forms and additive forms, however deep they are nested

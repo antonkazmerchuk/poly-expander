@@ -175,7 +175,7 @@
 		var coefficient, polys;
 
 		if (incorrect(poly)) {
-			throw new Error('Incorrect polynomial specified !' + ' Couldn\'t understand: ' + poly);
+			throw new Error('Incorrect polynomial specified !' + ' Couldn\'t understand: ' + JSON.stringify(poly));
 		}
 
 		if (simplePolynomial(poly)) {
